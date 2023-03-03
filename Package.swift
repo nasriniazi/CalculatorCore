@@ -5,22 +5,18 @@ import PackageDescription
 
 let package = Package(
     name: "CalculatorCore",
+    platforms: [.iOS(.v15)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "CalculatorCore",
             targets: ["CalculatorCore"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
+        .package(url: "https://github.com/nasriniazi/LogManager.git", branch: "main") ,.package(url:"https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0") )  ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CalculatorCore",
-            dependencies: []),
+            dependencies: [.product(name: "LogManager", package: "LogManager"),.product(name: "RxSwift", package: "RxSwift"),.product(name: "RxCocoa", package: "RxSwift")]),
         .testTarget(
             name: "CalculatorCoreTests",
             dependencies: ["CalculatorCore"]),
